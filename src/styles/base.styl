@@ -1,0 +1,51 @@
+//
+// Global styles
+//
+
+.app,
+.auth,
+#root,
+html,
+body
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+
+.align-center
+  text-align center
+
+.box > [class *= "pure-u"]
+  box-sizing border-box
+  padding 10px
+
+.clear
+  &:after
+    content ""
+    display table
+    clear both
+
+.left
+  float left
+
+.pure-g [class *= "pure-u"]
+  color $color-black
+  font-family sans-serif
+  font-size 14px
+  line-height 1.4286em
+
+.right
+  float right
+
+//
+// Typography and buttons
+//
+
+h1
+  font-size 2em
+  font-weight 600
+  line-height 1.25em

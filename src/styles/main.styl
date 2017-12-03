@@ -1,0 +1,13 @@
+@import "globals"
+@import "base"
+
+// Make helper classes for colors
+$colors = ('black' $color-black),
+  ('white' $color-white)
+
+for $color in $colors
+  .bg-{$color[0]}
+    background-color $color[1]
+
+  .color-{$color[0]}
+    color $color[1]

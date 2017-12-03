@@ -1,0 +1,1 @@
+export { withScreen } from './withScreen';
