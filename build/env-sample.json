@@ -1,0 +1,8 @@
+{
+    "development": {
+        "api": "https://api.ipify.org"
+    },
+    "production": {
+        "api": ""
+    }
+}

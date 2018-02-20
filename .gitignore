@@ -4,3 +4,4 @@ build/env.json
 
 *.log
 node_modules/
+.vscode
