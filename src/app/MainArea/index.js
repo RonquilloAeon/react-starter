@@ -1,7 +1,8 @@
 import { Link, Route, Switch } from 'react-router-dom';
 import React from 'react';
 
-import { About, Home } from '../../screens';
+import About from '../../screens/About';
+import Home from '../../screens/Home';
 import styles from './MainArea.styl'
 
 const MainArea = () => (
