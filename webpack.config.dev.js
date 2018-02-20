@@ -6,12 +6,12 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client?noInfo=true&reload=true',
-    './src/index.js'
+    './src/index.js',
   ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/',
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -24,12 +24,16 @@ module.exports = {
       minify: {
         removeComments: true,
         collapseWhitespace: true,
-        removeAttributeQuotes: true
+        removeAttributeQuotes: true,
       },
     }),
   ],
   module: {
     loaders: [
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
       {
         test: /\.(?:png|jpg|svg|woff|woff2)$/,
         loader: 'url-loader',
@@ -47,23 +51,29 @@ module.exports = {
       // CSS
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        loader: 'style-loader!css-loader',
       },
       {
         test: /\.styl$/,
-        include: path.join(__dirname, 'src'),
-        loader: 'style-loader!css-loader!stylus-loader'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
+        oneOf: [
+          {
+            resourceQuery: /standard/,
+            loader: 'style-loader!css-loader!stylus-loader',
+          },
+          {
+            loader: 'style-loader!css-loader?modules=true&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!stylus-loader',
+          },
+        ],
       },
     ],
+  },
+  resolve: {
+    extensions: ['.css', '.js', '.json', '.styl'],
   },
   stats: {
     colors: true,
     modules: true,
     reasons: true,
-    errorDetails: true
-  }
+    errorDetails: true,
+  },
 };

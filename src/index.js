@@ -7,8 +7,8 @@ import rootSaga from './sagas';
 import store from './store';
 import 'url-search-params-polyfill';
 
-import dependencies from './styles/dependencies.styl';
-import styles from './styles/main.styl';
+import dependencies from './styles/dependencies?standard';
+import styles from './styles/main?standard';
 
 // components
 import App from './app';

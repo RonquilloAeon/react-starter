@@ -5,25 +5,24 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   devtool: 'source-map',
   entry: [
-
-    './src/index'
+    './src/index',
   ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/',
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': "'production'"
-      }
+        'NODE_ENV': "'production'",
+      },
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
-        warnings: false
-      }
+        warnings: false,
+      },
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -33,12 +32,16 @@ module.exports = {
       minify: {
         removeComments: true,
         collapseWhitespace: true,
-        removeAttributeQuotes: true
+        removeAttributeQuotes: true,
       },
     }),
   ],
   module: {
     loaders: [
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
       {
         test: /\.(?:png|jpg|svg|woff|woff2)$/,
         loader: 'url-loader',
@@ -60,13 +63,18 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        include: path.join(__dirname, 'src'),
-        loader: 'style-loader!css-loader!stylus-loader'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
+        oneOf: [
+          {
+            resourceQuery: /standard/,
+            loader: 'style-loader!css-loader!stylus-loader',
+          },
+          {
+            loader: 'style-loader!css-loader?modules=true&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!stylus-loader',
+          }
+        ],
       },
     ],
-  }
+  },resolve: {
+    extensions: ['.css', '.js', '.json', '.styl'],
+  },
 };
